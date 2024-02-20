@@ -1,0 +1,109 @@
+import React, { useState } from "react";
+import { View, Text, TextInput, StyleSheet, Image } from "react-native";
+import { useNavigation } from '@react-navigation/native';
+import Button from "../component/Button";
+
+export default function PantallaInicioSesion() {
+    const [nombreUsuario, setNombreUsuario] = useState('');
+    const [contraseña, setContraseña] = useState('');
+    const navigation = useNavigation();
+
+    const iniciarSesion = () => {
+        if (nombreUsuario.trim() === '' || contraseña.trim() === '') {
+            alert('Por favor, ingresa un nombre de usuario y contraseña válidos.');
+            return;
+        }
+
+        if (contraseña.trim().length < 5) {
+            alert('La contraseña debe tener al menos 5 caracteres.');
+            return;
+        }
+
+        alert('¡Felicidades! Te has logeado correctamente.');
+        setNombreUsuario('');
+        setContraseña('');
+    };
+
+    const navigateToCounter = () => {
+        navigation.navigate('Counters');
+    };
+
+    return (
+        <View style={styles.contenedor}>
+            <Image source={require('../assets/logo.png')} style={styles.logo} />
+            <Text style={styles.titulo}>Inicio de Sesión</Text>
+            <TextInput
+                style={styles.entrada}
+                value={nombreUsuario}
+                onChangeText={setNombreUsuario}
+                placeholder="Nombre de Usuario"
+            />
+            <TextInput
+                style={styles.entrada}
+                value={contraseña}
+                onChangeText={setContraseña}
+                placeholder="Contraseña"
+                secureTextEntry
+            />
+            <Button
+                onPress={iniciarSesion}
+                buttonStyle={styles.boton}
+                textStyle={styles.textoBoton}
+            >
+                Iniciar Sesión
+            </Button>
+            <Button
+                onPress={navigateToCounter}
+                buttonStyle={[styles.boton, styles.botonSecundario]}
+                textStyle={styles.textoBoton}
+            >
+                Recuperar Contraseña
+            </Button>
+        </View>
+    );
+}
+
+const styles = StyleSheet.create({
+    contenedor: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: 'white',
+        padding: 20,
+    },
+    logo: {
+        width: 100,
+        height: 100,
+        marginBottom: 20,
+    },
+    titulo: {
+        fontSize: 24,
+        fontWeight: 'bold',
+        marginBottom: 20,
+    },
+    entrada: {
+        width: '100%',
+        height: 40,
+        borderWidth: 1,
+        borderColor: '#ccc',
+        borderRadius: 5,
+        marginBottom: 10,
+        paddingHorizontal: 10,
+    },
+    boton: {
+        borderRadius: 20,
+        backgroundColor: '#52dee5',
+        width: 200,
+        height: 40,
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginBottom: 10,
+    },
+    botonSecundario: {
+        backgroundColor: '#52dee5',
+    },
+    textoBoton: {
+        color: 'white',
+        fontSize: 16,
+    },
+});

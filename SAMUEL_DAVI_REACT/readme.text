@@ -1,0 +1,21 @@
+# Card Component
+
+El componente `Card` es un componente de React que muestra una lista de elementos interactivos.
+
+## Props
+
+- `children`: Un array de objetos que representan los elementos hijos del componente. Cada objeto debe tener una propiedad `text` que se mostrará en el elemento correspondiente.
+- `cardStyle`: Un objeto que define el estilo del componente. Este estilo se aplicará tanto al contenedor principal como a cada elemento hijo.
+
+## Estado
+
+- `getColor`: Un estado que representa el color de fondo de los elementos hijos. Inicialmente es "red", pero cambia a "blue" cuando se hace clic en un elemento hijo.
+
+## Renderizado
+
+El componente `Card` renderiza un contenedor principal con un borde redondeado. Dentro de este contenedor, se renderiza un elemento `TouchableOpacity` para cada objeto en la prop `children`. Cada `TouchableOpacity` tiene un borde redondeado, un ancho y una altura fijos, y un color de fondo que depende del estado `getColor`. Cuando se hace clic en un `TouchableOpacity`, el estado `getColor` cambia de "red" a "blue", o viceversa.
+
+## Uso
+
+```jsx
+<Card cardStyle={{backgroundColor: 'white'}} children={[{text: 'Child 1'}, {text: 'Child 2'}]} />
